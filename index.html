@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Toko Sepatu Keren</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f2f2f2;
+      color: #333;
+    }
+
+    header {
+      background-color: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background-color: white;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .product img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .cart {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .cart h2 {
+      margin-top: 0;
+    }
+
+    .cart-item {
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+    }
+
+    .cart-total {
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Toko Sepatu kenzie arafa</h1>
+    <p>Cari sepatu kece? Di sini tempatnya!!!</p>
+  </header>
+
+  <main>
+    <h2>Daftar Produk</h2>
+    <div class="product-grid" id="produk-list">
+      <!-- Produk akan dimasukkan lewat JavaScript -->
+    </div>
+
+    <div class="cart" id="keranjang">
+      <h2>Keranjang Belanja</h2>
+      <div id="cart-items"></div>
+      <p class="cart-total" id="total-harga">Total: Rp 0</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Toko Sepatu Kenzie Arafa. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const produk = [
+      { nama: "Sepatu samba", harga: 350000, gambar: "sp1.jpeg" },
+      { nama: "Sepatu samba", harga: 420000, gambar: "sp2.jpeg" },
+      { nama: "Sepatu jordan 1", harga: 390000, gambar: "sp3.jpeg" },
+      { nama: "Sepatu jordan", harga: 580000, gambar: "sp4.jpeg" },
+      { nama: "Sepatu jordan retro", harga: 310000, gambar: "sp5.jpeg" },
+      { nama: "Sepatu jordan retro", harga: 455000, gambar: "sp6.jpeg" },
+      { nama: "Sepatu jordan 4", harga: 670000, gambar: "sp7.jpeg" },
+      { nama: "Sepatu jordan 4", harga: 360000, gambar: "sp8.jpeg" },
+      { nama: "Sepatu jordan 5", harga: 280000, gambar: "sp9.jpeg" },
+    ];
+
+    const produkList = document.getElementById("produk-list");
+    const cartItems = document.getElementById("cart-items");
+    const totalHarga = document.getElementById("total-harga");
+
+    let total = 0;
+
+    produk.forEach((item) => {
+      const div = document.createElement("div");
+      div.className = "product";
+      div.innerHTML = `
+        <h3>${item.nama}</h3>
+        <img src="${item.gambar}" alt="${item.nama}">
+        <p>Harga: Rp ${item.harga.toLocaleString()}</p>
+        <button onclick="tambahKeKeranjang('${item.nama}', ${item.harga})">Beli Sekarang</button>
+      `;
+      produkList.appendChild(div);
+    });
+
+    function tambahKeKeranjang(nama, harga) {
+      const item = document.createElement("div");
+      item.className = "cart-item";
+      item.textContent = `${nama} - Rp ${harga.toLocaleString()}`;
+      cartItems.appendChild(item);
+
+      total += harga;
+      totalHarga.textContent = `Total: Rp ${total.toLocaleString()}`;
+    }
+  </script>
+
+</body>
+</html>
